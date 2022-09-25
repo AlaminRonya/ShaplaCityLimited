@@ -3,6 +3,7 @@ package com.example.shapla_city_limited.controller;
 import com.example.shapla_city_limited.dto.RequestClientDto;
 import com.example.shapla_city_limited.entity.ClientInformation;
 import com.example.shapla_city_limited.repository.ClientRepository;
+import com.example.shapla_city_limited.service.ClientInformationService;
 import com.example.shapla_city_limited.validation.ClientValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,8 @@ import java.util.UUID;
 
 @Controller
 public class ClientInformationController {
+    @Autowired
+    private ClientInformationService clientInformationService;
 
 
     @GetMapping("/client/add")
@@ -47,6 +50,7 @@ public class ClientInformationController {
             System.out.println(validationResult.name());
             return "addClient";
         }
+        clientInformationService.addClient(dto);
         return "redirect:/client/add";
     }
 
