@@ -57,7 +57,7 @@
                 <a href="/${dto.clientID}">Edit</a>
             </td>
             <td>
-                <a href="/${dto.clientID}">Delete</a>
+                <a href="/client/delete/${dto.clientID}">Delete</a>
             </td>
         </tr>
 

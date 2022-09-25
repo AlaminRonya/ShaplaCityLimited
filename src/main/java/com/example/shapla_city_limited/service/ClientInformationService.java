@@ -40,4 +40,12 @@ public class ClientInformationService {
             clientRepository.activeByUuId(uuid1, !clientInformation.getStatus());
         }
     }
+
+    public void delete(UUID uuid1) {
+        final Optional<ClientInformation> byClientID = clientRepository.findByClientID(uuid1);
+        if (byClientID.isPresent()){
+            final ClientInformation clientInformation = byClientID.get();
+            clientRepository.deleteById(clientInformation.getId());
+        }
+    }
 }

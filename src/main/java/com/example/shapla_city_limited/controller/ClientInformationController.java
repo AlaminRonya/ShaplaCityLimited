@@ -70,11 +70,17 @@ public class ClientInformationController {
     }
 
     @GetMapping("/client/active/{uuid}")
-    public String activeAndDeactive(@PathVariable("uuid") String uuid){
+    public String clientActiveAndDeactive(@PathVariable("uuid") String uuid){
         final UUID uuid1 = UUID.fromString(uuid);
         clientInformationService.activeChange(uuid1);
         return "redirect:/client/all";
     }
 
+    @GetMapping("/client/delete/{uuid}")
+    public String clientDelete(@PathVariable("uuid") String uuid){
+        final UUID uuid1 = UUID.fromString(uuid);
+        clientInformationService.delete(uuid1);
+        return "redirect:/client/all";
+    }
 
 }
