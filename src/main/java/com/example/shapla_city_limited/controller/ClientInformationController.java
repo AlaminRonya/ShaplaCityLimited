@@ -3,6 +3,7 @@ package com.example.shapla_city_limited.controller;
 import com.example.shapla_city_limited.dto.RequestClientDto;
 import com.example.shapla_city_limited.entity.ClientInformation;
 import com.example.shapla_city_limited.repository.ClientRepository;
+import com.example.shapla_city_limited.validation.ClientValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -34,10 +35,16 @@ public class ClientInformationController {
         System.out.println("dto: "+dto);
 
 
-
         if (result.hasErrors()){
 
             System.out.println("=============Error==============");
+            return "addClient";
+        }
+        ClientValidator.ValidationResult validationResult = ClientValidator.isPhoneNumberValid()
+                .and(ClientValidator.isWhatsAppNumberValid())
+                .apply(dto);
+        if (validationResult != ClientValidator.ValidationResult.SUCCESS){
+            System.out.println(validationResult.name());
             return "addClient";
         }
         return "redirect:/client/add";
