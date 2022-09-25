@@ -27,7 +27,7 @@ public class ClientInformation implements Serializable {
     private UUID clientID;
     private String name;
     private String country;
-    private Date bookingDate;
+    private String bookingDate;
     private String phoneNumber;
     private String address;
     private String buildingNo;
