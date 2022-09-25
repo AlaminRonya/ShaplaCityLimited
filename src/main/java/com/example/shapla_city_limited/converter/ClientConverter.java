@@ -26,7 +26,7 @@ public class ClientConverter {
     public static ResponseClientDto pojoToDto(ClientInformation clientInformation){
         ResponseClientDto responseClientDto = new ResponseClientDto();
         responseClientDto.setId(clientInformation.getId());
-        responseClientDto.setClientID(clientInformation.getClientID());
+        responseClientDto.setClientID(clientInformation.getClientID().toString());
         responseClientDto.setName(clientInformation.getName());
         responseClientDto.setCountry(clientInformation.getCountry());
         responseClientDto.setBookingDate(clientInformation.getBookingDate());
@@ -37,6 +37,11 @@ public class ClientConverter {
         responseClientDto.setFlatSize(clientInformation.getFlatSize());
         responseClientDto.setContactMessenger(clientInformation.getContactMessenger());
         responseClientDto.setContactWhatsApp(clientInformation.getContactWhatsApp());
+        if (!clientInformation.getStatus()){
+            responseClientDto.setStatus("Deactive");
+        }else {
+            responseClientDto.setStatus("Active");
+        }
 
         return responseClientDto;
     }

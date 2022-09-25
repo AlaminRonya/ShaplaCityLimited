@@ -11,7 +11,7 @@ import java.util.UUID;
 public class ResponseClientDto {
 
     private Long id;
-    private UUID clientID;
+    private String clientID;
     private String name;
     private String country;
     private String bookingDate;
@@ -22,5 +22,5 @@ public class ResponseClientDto {
     private String flatSize;
     private String contactMessenger;
     private String contactWhatsApp;
-    private Boolean status;
+    private String status;
 }
