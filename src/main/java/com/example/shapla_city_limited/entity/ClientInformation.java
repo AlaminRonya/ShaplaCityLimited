@@ -32,7 +32,7 @@ public class ClientInformation implements Serializable {
     private String address;
     private String buildingNo;
     private String fileNo;
-    private Integer flatSize;
+    private String flatSize;
     private String contactMessenger;
     private String contactWhatsApp;
     private Boolean status = false;
