@@ -14,10 +14,13 @@
 
 </head>
 <body>
+<a style="margin: 20px 0" href="/client/all" class="btn btn-primary">All Client</a>
 
 
 <div class="container-fluid">
+
     <div class="container">
+
         <div class="col-sm-6">
             <h3 style="margin-top: 10px">Add Clint</h3>
 

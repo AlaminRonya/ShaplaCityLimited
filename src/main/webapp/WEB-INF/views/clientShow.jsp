@@ -15,6 +15,8 @@
 </head>
 <body>
 
+<a style="margin: 20px 0" href="${pageContext.request.contextPath}/client/add" class="btn btn-primary">Add Client</a>
+
 
 
 <table class="table">
