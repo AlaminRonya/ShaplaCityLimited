@@ -2,8 +2,6 @@ package com.example.shapla_city_limited.controller;
 
 import com.example.shapla_city_limited.dto.RequestClientDto;
 import com.example.shapla_city_limited.dto.ResponseClientDto;
-import com.example.shapla_city_limited.entity.ClientInformation;
-import com.example.shapla_city_limited.repository.ClientRepository;
 import com.example.shapla_city_limited.service.ClientInformationService;
 import com.example.shapla_city_limited.validation.ClientValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +11,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.UUID;
 
 @Controller
@@ -80,6 +73,34 @@ public class ClientInformationController {
     public String clientDelete(@PathVariable("uuid") String uuid){
         final UUID uuid1 = UUID.fromString(uuid);
         clientInformationService.delete(uuid1);
+        return "redirect:/client/all";
+    }
+
+    @GetMapping("/client/update/{uuid}")
+    public String updatePage(@PathVariable("uuid")String uuid, @ModelAttribute("requestClientDto")ResponseClientDto dto, Model model ){
+        System.out.println();
+        final UUID uuid1 = UUID.fromString(uuid);
+        final ResponseClientDto clientByUUID = clientInformationService.getClientByUUID(uuid1);
+
+        if (clientByUUID != null){
+            model.addAttribute("responseClientDto", clientByUUID);
+        }
+        return "updateClient";
+    }
+
+    @PostMapping("/client/update/{uuid}")
+    public String update(@PathVariable("uuid")String uuid, @Valid  @ModelAttribute("requestClientDto")RequestClientDto dto, BindingResult result, Model model ){
+        if (result.hasErrors()){
+//            model.addAttribute("responseClientDto", clientByUUID);
+            return "updateClient";
+        }
+        final UUID uuid1 = UUID.fromString(uuid);
+        clientInformationService.update(uuid1, dto);
+
+
+//        if (clientByUUID != null){
+//            model.addAttribute("responseClientDto", clientByUUID);
+//        }
         return "redirect:/client/all";
     }
 

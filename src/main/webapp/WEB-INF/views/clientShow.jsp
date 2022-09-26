@@ -54,7 +54,7 @@
             <td>${dto.contactWhatsApp}</td>
             <td><a href="/client/active/${dto.clientID}">${dto.status}</a></td>
             <td>
-                <a href="/${dto.clientID}">Edit</a>
+                <a href="${pageContext.request.contextPath}/client/update/${dto.clientID}">Edit</a>
             </td>
             <td>
                 <a href="/client/delete/${dto.clientID}">Delete</a>

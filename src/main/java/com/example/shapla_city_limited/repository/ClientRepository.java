@@ -21,4 +21,13 @@ public interface ClientRepository extends JpaRepository<ClientInformation, Long>
     @Query("UPDATE ClientInformation c " + "SET c.status = ?2    WHERE c.clientID = ?1")
     int activeByUuId(UUID uuid, Boolean status);
 
+    @Transactional
+    @Modifying
+    @Query("UPDATE ClientInformation c " + "SET c.name = ?2, c.country = ?3, c.bookingDate = ?4, c.phoneNumber = ?5," +
+            "c.address = ?6, c.buildingNo = ?7, c.fileNo = ?8, c.flatSize = ?9, c.contactMessenger = ?10," +
+            "c.contactWhatsApp = ?11 WHERE c.clientID = ?1")
+    int updateClient(UUID uuid, String name, String country, String bookingDate, String phoneNumber,
+                     String address, String buildingNo, String fileNo, String fileSize, String messenger,
+                     String whatsApp);
+
 }

@@ -72,7 +72,7 @@
 
                 <div class="form-group">
                     <label for="flatSize">flat Size </label>
-                    <form:input type="number" name="flatSize" path="flatSize"/>
+                    <form:input type="text" name="flatSize" path="flatSize"/>
                     <form:errors path="flatSize" cssClass="text-danger" />
                 </div>
 

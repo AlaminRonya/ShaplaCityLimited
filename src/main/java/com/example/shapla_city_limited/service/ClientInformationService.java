@@ -48,4 +48,61 @@ public class ClientInformationService {
             clientRepository.deleteById(clientInformation.getId());
         }
     }
+
+    public void update(UUID uuid, RequestClientDto dto) {
+
+        final Optional<ClientInformation> byClientID = clientRepository.findByClientID(uuid);
+        if (byClientID.isPresent()){
+            dto.setAddress("Dhaka");
+            final ClientInformation clientInformation = checkUpdateValue(byClientID.get(), dto);
+            clientRepository.updateClient(uuid,clientInformation.getName(),
+                    clientInformation.getCountry(), clientInformation.getBookingDate(),
+                    clientInformation.getPhoneNumber(), clientInformation.getAddress(),
+                    clientInformation.getBuildingNo(),
+                    clientInformation.getFileNo(), clientInformation.getFlatSize(),
+                    clientInformation.getContactMessenger(),
+                    clientInformation.getContactWhatsApp());
+        }
+    }
+
+    private ClientInformation checkUpdateValue(ClientInformation clientInformation, RequestClientDto dto) {
+        if (!dto.getName().equals(clientInformation.getName())) {
+            clientInformation.setName(dto.getName());
+        }
+
+        if (!dto.getCountry().equals(clientInformation.getCountry())) {
+            clientInformation.setCountry(dto.getCountry());
+        }
+        if (!dto.getBookingDate().equals(clientInformation.getBookingDate())) {
+            clientInformation.setBookingDate(dto.getBookingDate());
+        }
+        if (!dto.getPhoneNumber().equals(clientInformation.getPhoneNumber())) {
+            clientInformation.setPhoneNumber(dto.getPhoneNumber());
+        }
+        if (!dto.getAddress().equals(clientInformation.getAddress())) {
+            clientInformation.setAddress(dto.getAddress());
+        }
+        if (!dto.getBuildingNo().equals(clientInformation.getBuildingNo())) {
+            clientInformation.setBuildingNo(dto.getBuildingNo());
+        }
+        if (!dto.getFileNo().equals(clientInformation.getFileNo())) {
+            clientInformation.setFileNo(dto.getFileNo());
+        }
+        if (!dto.getFlatSize().equals(clientInformation.getFlatSize())) {
+            clientInformation.setFlatSize(dto.getFlatSize());
+        }
+        if (!dto.getContactMessenger().equals(clientInformation.getContactMessenger())) {
+            clientInformation.setContactMessenger(dto.getContactMessenger());
+        }
+        if (!dto.getContactWhatsApp().equals(clientInformation.getContactWhatsApp())) {
+            clientInformation.setContactWhatsApp(dto.getContactWhatsApp());
+        }
+        clientInformation.setCountry("UK");
+        return clientInformation;
+    }
+
+    public ResponseClientDto getClientByUUID(UUID uuid){
+        final Optional<ClientInformation> byClientID = clientRepository.findByClientID(uuid);
+        return byClientID.map(ClientConverter::pojoToDto).orElse(null);
+    }
 }
